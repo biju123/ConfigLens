@@ -1,0 +1,96 @@
+{
+  "ruleSetId": "default",
+  "name": "Default Rule Set",
+  "rules": [
+    {
+      "ruleId": "database-connectionstring-required",
+      "ruleName": "Database connection string is required",
+      "ruleType": "RequiredExists",
+      "targetPath": "Database.ConnectionString",
+      "severity": "Critical",
+      "description": "Database connection string must be configured.",
+      "recommendation": "Set Database:ConnectionString in application configuration.",
+      "parameters": {}
+    },
+    {
+      "ruleId": "database-retrycount-required",
+      "ruleName": "Database retry count is required",
+      "ruleType": "RequiredExists",
+      "targetPath": "Database.RetryCount",
+      "severity": "High",
+      "description": "Database retry count must be configured.",
+      "recommendation": "Set Database:RetryCount in application configuration.",
+      "parameters": {}
+    },
+    {
+      "ruleId": "servicebus-queue-not-empty",
+      "ruleName": "Service Bus queue must not be empty",
+      "ruleType": "NotEmpty",
+      "targetPath": "ServiceBus.Queue",
+      "severity": "High",
+      "description": "Service Bus queue name must not be empty.",
+      "recommendation": "Set a non-empty ServiceBus:Queue value.",
+      "parameters": {}
+    },
+    {
+      "ruleId": "database-commandtimeout-range",
+      "ruleName": "Database command timeout within range",
+      "ruleType": "NumericRange",
+      "targetPath": "Database.CommandTimeout",
+      "severity": "Medium",
+      "description": "Database command timeout should be between 5 and 120 seconds.",
+      "recommendation": "Adjust Database:CommandTimeout to a value between 5 and 120.",
+      "parameters": { "min": "5", "max": "120" }
+    },
+    {
+      "ruleId": "database-provider-allowed",
+      "ruleName": "Database provider is supported",
+      "ruleType": "AllowedValues",
+      "targetPath": "Database.Provider",
+      "severity": "Medium",
+      "description": "Database provider must be one of the supported providers.",
+      "recommendation": "Set Database:Provider to AzureSql or SqlServer.",
+      "parameters": { "allowedValues": "AzureSql,SqlServer" }
+    },
+    {
+      "ruleId": "servicebus-namespace-format",
+      "ruleName": "Service Bus namespace naming convention",
+      "ruleType": "FormatMatch",
+      "targetPath": "ServiceBus.Namespace",
+      "severity": "Low",
+      "description": "Service Bus namespace should follow the sb-<name> naming convention.",
+      "recommendation": "Rename the Service Bus namespace to match ^sb-[a-z0-9-]+$.",
+      "parameters": { "pattern": "^sb-[a-z0-9-]+$" }
+    },
+    {
+      "ruleId": "sessionyear-configuration-exists",
+      "ruleName": "Configuration exists for session year",
+      "ruleType": "SessionYearExists",
+      "targetPath": "$root",
+      "severity": "High",
+      "description": "Configuration must exist for the requested session year.",
+      "recommendation": "Publish configuration for the requested session year before running assessments.",
+      "parameters": {}
+    },
+    {
+      "ruleId": "commandtimeout-consistent-across-applications",
+      "ruleName": "Command timeout consistent across applications",
+      "ruleType": "CrossApplicationConsistency",
+      "targetPath": "Database.CommandTimeout",
+      "severity": "Low",
+      "description": "Database command timeout should be consistent across Assessor applications.",
+      "recommendation": "Align Database:CommandTimeout across applications for the same environment/tenant/session year.",
+      "parameters": { "compareApplication": "AssessorPortal" }
+    },
+    {
+      "ruleId": "servicebus-queue-consistent-across-environments",
+      "ruleName": "Service Bus queue consistent across environments",
+      "ruleType": "CrossEnvironmentConsistency",
+      "targetPath": "ServiceBus.Queue",
+      "severity": "Low",
+      "description": "Service Bus queue naming should be consistent between Production and Staging.",
+      "recommendation": "Align ServiceBus:Queue naming across environments for the same application/tenant/session year.",
+      "parameters": { "compareEnvironment": "Staging" }
+    }
+  ]
+}

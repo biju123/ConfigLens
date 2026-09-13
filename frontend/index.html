@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ConfigLens</title>
+    <!-- Populated at container start by docker-entrypoint.sh from CONFIGLENS_API_BASE_URL;
+         absent in local dev, where VITE_API_BASE_URL (build-time) is used instead. -->
+    <script src="/env-config.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

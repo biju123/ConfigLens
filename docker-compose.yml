@@ -1,0 +1,29 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: src/ConfigLens.Api/Dockerfile
+    ports:
+      - "5080:8080"
+    environment:
+      CONFIGLENS_AUTH_USERNAME: ${CONFIGLENS_AUTH_USERNAME:-user}
+      CONFIGLENS_AUTH_PASSWORD: ${CONFIGLENS_AUTH_PASSWORD:-password}
+      CONFIGLENS_JWT_SIGNING_KEY: ${CONFIGLENS_JWT_SIGNING_KEY:?Set CONFIGLENS_JWT_SIGNING_KEY in your .env file}
+      CONFIGLENS_FRONTEND_ORIGIN: ${CONFIGLENS_FRONTEND_ORIGIN:-http://localhost:5173}
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080"]
+      interval: 10s
+      timeout: 3s
+      start_period: 10s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:80"
+    environment:
+      CONFIGLENS_API_BASE_URL: ${CONFIGLENS_API_BASE_URL:-http://localhost:5080}
+    depends_on:
+      backend:
+        condition: service_healthy

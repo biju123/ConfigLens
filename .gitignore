@@ -1,0 +1,16 @@
+# Real environment file - contains secrets, never commit. .env.example is the template.
+.env
+
+# .NET build output
+backend/**/bin/
+backend/**/obj/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# OS / editor
+.DS_Store
+.idea/
+.vs/
+*.user

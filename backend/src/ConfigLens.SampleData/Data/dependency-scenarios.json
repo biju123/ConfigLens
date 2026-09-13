@@ -1,0 +1,41 @@
+[
+  {
+    "application": "AssessorApi",
+    "environment": "Production",
+    "namespace": "assessor-prod",
+    "checks": [
+      { "dependencyType": "AzureSql", "targetDescription": "sql-assessor-prod.database.windows.net/Assessor", "status": "Accessible", "latencyMs": 42 },
+      { "dependencyType": "AzureTableStorage", "targetDescription": "stassessorprod/AssessmentRecords", "status": "Accessible", "latencyMs": 18 },
+      { "dependencyType": "AzureBlobStorage", "targetDescription": "stassessorprod/assessment-documents", "status": "Timeout", "failureReason": "Connection attempt to the blob endpoint timed out after 5000ms." },
+      { "dependencyType": "AzureServiceBus", "targetDescription": "sb-assessor-prod/assessor-events", "status": "Accessible", "latencyMs": 25 },
+      { "dependencyType": "AzureKeyVault", "targetDescription": "kv-assessor-prod", "status": "ConfigurationInvalid", "failureReason": "Key Vault URI is not a valid HTTPS URI." },
+      { "dependencyType": "ExternalApi", "targetDescription": "partner-tax-records-api", "status": "Inaccessible", "failureReason": "DNS resolution failed for the external partner API host." }
+    ]
+  },
+  {
+    "application": "AssessorApi",
+    "environment": "Staging",
+    "namespace": "assessor-staging",
+    "checks": [
+      { "dependencyType": "AzureSql", "targetDescription": "sql-assessor-staging.database.windows.net/Assessor", "status": "Accessible", "latencyMs": 51 },
+      { "dependencyType": "AzureTableStorage", "targetDescription": "stassessorstaging/AssessmentRecords", "status": "Accessible", "latencyMs": 22 },
+      { "dependencyType": "AzureBlobStorage", "targetDescription": "stassessorstaging/assessment-documents", "status": "Accessible", "latencyMs": 30 },
+      { "dependencyType": "AzureServiceBus", "targetDescription": "(not configured)", "status": "ConfigurationMissing", "failureReason": "ServiceBus:Namespace is not configured for Staging." },
+      { "dependencyType": "AzureKeyVault", "targetDescription": "kv-assessor-staging", "status": "Accessible", "latencyMs": 40 },
+      { "dependencyType": "ExternalApi", "targetDescription": "partner-tax-records-api", "status": "NotApplicable", "failureReason": "External partner API integration is not enabled in Staging." }
+    ]
+  },
+  {
+    "application": "AssessorApi",
+    "environment": "Production",
+    "namespace": "assessor-prod-riverbend",
+    "checks": [
+      { "dependencyType": "AzureSql", "targetDescription": "sql-assessor-prod.database.windows.net/AssessorRiverbend", "status": "ValidationError", "failureReason": "Connection succeeded but the SELECT 1 health-check query returned an unexpected result." },
+      { "dependencyType": "AzureTableStorage", "targetDescription": "stassessorriverbend/AssessmentRecords", "status": "Accessible", "latencyMs": 20 },
+      { "dependencyType": "AzureBlobStorage", "targetDescription": "stassessorriverbend/assessment-documents", "status": "Accessible", "latencyMs": 28 },
+      { "dependencyType": "AzureServiceBus", "targetDescription": "sb-assessor-riverbend-prod/(no queue configured)", "status": "ConfigurationMissing", "failureReason": "ServiceBus:Queue is not configured." },
+      { "dependencyType": "AzureKeyVault", "targetDescription": "kv-assessor-riverbend", "status": "Accessible", "latencyMs": 35 },
+      { "dependencyType": "ExternalApi", "targetDescription": "partner-tax-records-api", "status": "Accessible", "latencyMs": 210 }
+    ]
+  }
+]

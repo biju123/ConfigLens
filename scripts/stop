@@ -1,0 +1,9 @@
+#!/bin/sh
+# Stops the ConfigLens Docker Compose stack (macOS/Linux).
+set -e
+
+cd "$(dirname "$0")/.."
+
+docker compose down
+
+echo "ConfigLens stopped."

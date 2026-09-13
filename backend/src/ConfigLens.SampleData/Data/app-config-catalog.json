@@ -1,0 +1,171 @@
+[
+  {
+    "application": "AssessorApi",
+    "environment": "Production",
+    "tenant": "ContosoCounty",
+    "sessionYear": 2026,
+    "sections": [
+      {
+        "name": "Database",
+        "items": [
+          { "key": "ConnectionString", "value": "Server=sql-assessor-prod.database.windows.net;Database=Assessor;User Id=svc_assessor;Password=Cor6ectHorseBattery!;", "sensitive": true },
+          { "key": "Provider", "value": "AzureSql", "sensitive": false },
+          { "key": "CommandTimeout", "value": "30", "sensitive": false },
+          { "key": "RetryCount", "value": "3", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "ServiceBus",
+        "items": [
+          { "key": "Namespace", "value": "sb-assessor-prod", "sensitive": false },
+          { "key": "Queue", "value": "assessor-events", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "Storage",
+        "items": [
+          { "key": "Account", "value": "stassessorprod", "sensitive": false },
+          { "key": "Table", "value": "AssessmentRecords", "sensitive": false }
+        ],
+        "subSections": []
+      }
+    ]
+  },
+  {
+    "application": "AssessorApi",
+    "environment": "Staging",
+    "tenant": "ContosoCounty",
+    "sessionYear": 2026,
+    "sections": [
+      {
+        "name": "Database",
+        "items": [
+          { "key": "ConnectionString", "value": "Server=sql-assessor-staging.database.windows.net;Database=Assessor;User Id=svc_assessor;Password=St4gingOnlyKey!;", "sensitive": true },
+          { "key": "Provider", "value": "AzureSql", "sensitive": false },
+          { "key": "CommandTimeout", "value": "30", "sensitive": false },
+          { "key": "RetryCount", "value": "3", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "ServiceBus",
+        "items": [
+          { "key": "Namespace", "value": "sb-assessor-staging", "sensitive": false },
+          { "key": "Queue", "value": "assessor-events", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "Storage",
+        "items": [
+          { "key": "Account", "value": "stassessorstaging", "sensitive": false },
+          { "key": "Table", "value": "AssessmentRecords", "sensitive": false }
+        ],
+        "subSections": []
+      }
+    ]
+  },
+  {
+    "application": "AssessorApi",
+    "environment": "Production",
+    "tenant": "ContosoCounty",
+    "sessionYear": 2025,
+    "sections": [
+      {
+        "name": "Database",
+        "items": [
+          { "key": "ConnectionString", "value": "Server=sql-assessor-prod.database.windows.net;Database=Assessor2025;User Id=svc_assessor;Password=Cor6ectHorseBattery!;", "sensitive": true },
+          { "key": "Provider", "value": "AzureSql", "sensitive": false },
+          { "key": "CommandTimeout", "value": "30", "sensitive": false },
+          { "key": "RetryCount", "value": "3", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "ServiceBus",
+        "items": [
+          { "key": "Namespace", "value": "sb-assessor-prod", "sensitive": false },
+          { "key": "Queue", "value": "assessor-events-2025", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "Storage",
+        "items": [
+          { "key": "Account", "value": "stassessorprod", "sensitive": false },
+          { "key": "Table", "value": "AssessmentRecords2025", "sensitive": false }
+        ],
+        "subSections": []
+      }
+    ]
+  },
+  {
+    "application": "AssessorApi",
+    "environment": "Production",
+    "tenant": "RiverbendCounty",
+    "sessionYear": 2026,
+    "sections": [
+      {
+        "name": "Database",
+        "items": [
+          { "key": "ConnectionString", "value": "Server=sql-assessor-prod.database.windows.net;Database=AssessorRiverbend;User Id=svc_assessor;Password=Riv3rbendSecret!;", "sensitive": true },
+          { "key": "Provider", "value": "AzureSql", "sensitive": false },
+          { "key": "CommandTimeout", "value": "999", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "ServiceBus",
+        "items": [
+          { "key": "Namespace", "value": "sb-assessor-riverbend-prod", "sensitive": false },
+          { "key": "Queue", "value": "", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "Storage",
+        "items": [
+          { "key": "Account", "value": "stassessorriverbend", "sensitive": false },
+          { "key": "Table", "value": "AssessmentRecords", "sensitive": false }
+        ],
+        "subSections": []
+      }
+    ]
+  },
+  {
+    "application": "AssessorPortal",
+    "environment": "Production",
+    "tenant": "ContosoCounty",
+    "sessionYear": 2026,
+    "sections": [
+      {
+        "name": "Database",
+        "items": [
+          { "key": "ConnectionString", "value": "Server=sql-assessor-prod.database.windows.net;Database=AssessorPortal;User Id=svc_assessor_portal;Password=P0rtalSecret!;", "sensitive": true },
+          { "key": "Provider", "value": "PostgreSql", "sensitive": false },
+          { "key": "CommandTimeout", "value": "60", "sensitive": false },
+          { "key": "RetryCount", "value": "3", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "ServiceBus",
+        "items": [
+          { "key": "Namespace", "value": "ServiceBus-Prod-01", "sensitive": false },
+          { "key": "Queue", "value": "portal-events", "sensitive": false }
+        ],
+        "subSections": []
+      },
+      {
+        "name": "Storage",
+        "items": [
+          { "key": "Account", "value": "stassessorprod", "sensitive": false },
+          { "key": "Table", "value": "PortalSessions", "sensitive": false }
+        ],
+        "subSections": []
+      }
+    ]
+  }
+]

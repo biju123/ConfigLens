@@ -1,0 +1,14 @@
+{
+  "subscriptions": ["sub-assessor-prod-01", "sub-assessor-nonprod-01"],
+  "clusters": ["aks-assessor-prod-eastus", "aks-assessor-staging-eastus"],
+  "namespaces": ["assessor-prod", "assessor-staging", "assessor-prod-riverbend"],
+  "environments": ["Production", "Staging"],
+  "tenants": ["ContosoCounty", "RiverbendCounty"],
+  "applications": ["AssessorApi", "AssessorPortal"],
+  "sessionYears": [2025, 2026],
+  "ruleSets": [
+    { "ruleSetId": "default", "name": "Default Rule Set" },
+    { "ruleSetId": "strict", "name": "Strict Rule Set" }
+  ],
+  "dependencyTypes": ["AzureSql", "AzureTableStorage", "AzureBlobStorage", "AzureServiceBus", "AzureKeyVault", "ExternalApi"]
+}

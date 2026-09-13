@@ -1,0 +1,20 @@
+#!/bin/sh
+# Starts ConfigLens locally via Docker Compose (macOS/Linux).
+set -e
+
+cd "$(dirname "$0")/.."
+
+if [ ! -f .env ]; then
+  echo "No .env file found - copying .env.example to .env."
+  echo "Edit .env (especially CONFIGLENS_JWT_SIGNING_KEY) before using this outside local development."
+  cp .env.example .env
+fi
+
+docker compose up --build -d
+
+echo ""
+echo "ConfigLens is starting."
+echo "  Frontend: http://localhost:5173"
+echo "  Backend:  http://localhost:5080 (Swagger at /swagger)"
+echo ""
+echo "Run 'docker compose logs -f' to follow logs, or scripts/stop to stop."
