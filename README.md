@@ -1,8 +1,10 @@
 # ConfigLens
 
 Deployment configuration inspection and validation tool for Assessor
-projects. See `CLAUDE.md` for the full product/architecture spec and
-`docs/PLAN.md` / `docs/ARCHITECTURE.md` for how this MVP implements it.
+projects. See `CLAUDE.md` for the full product/architecture spec,
+`docs/PLAN.md` / `docs/ARCHITECTURE.md` for how this MVP implements it, and
+`docs/FRONTEND.md` for a frontend-specific developer guide (component
+composition, Redux vs. local state, click-to-API-call flows).
 
 ## Run it locally
 
