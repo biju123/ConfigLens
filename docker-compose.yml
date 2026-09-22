@@ -10,6 +10,13 @@ services:
       CONFIGLENS_AUTH_PASSWORD: ${CONFIGLENS_AUTH_PASSWORD:-password}
       CONFIGLENS_JWT_SIGNING_KEY: ${CONFIGLENS_JWT_SIGNING_KEY:?Set CONFIGLENS_JWT_SIGNING_KEY in your .env file}
       CONFIGLENS_FRONTEND_ORIGIN: ${CONFIGLENS_FRONTEND_ORIGIN:-http://localhost:5173}
+      # Azure service principal used by Azure.Identity's DefaultAzureCredential for the
+      # real AKS Deployment Scan (see README.md "AKS Deployment Scan prerequisites").
+      # Left blank, the AKS scan will fail with an authentication error; every other
+      # scan category runs on sample data and does not need these.
+      AZURE_TENANT_ID: ${AZURE_TENANT_ID:-}
+      AZURE_CLIENT_ID: ${AZURE_CLIENT_ID:-}
+      AZURE_CLIENT_SECRET: ${AZURE_CLIENT_SECRET:-}
     healthcheck:
       test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080"]
       interval: 10s
