@@ -35,12 +35,15 @@ const PROBLEM_TYPE_TO_KIND: Record<string, AppErrorKind> = {
   'authorization-failure': 'authorization-failure',
   'infrastructure-failure': 'infrastructure-failure',
   'application-failure': 'application-failure',
+  timeout: 'timeout',
 }
 
 function fallbackKindForStatus(status: number): AppErrorKind {
   if (status === 401) return 'authentication-failure'
   if (status === 403) return 'authorization-failure'
   if (status === 400 || status === 404 || status === 422) return 'invalid-input'
+  if (status === 502 || status === 503) return 'infrastructure-failure'
+  if (status === 504) return 'timeout'
   return 'application-failure'
 }
 

@@ -5,6 +5,16 @@
     <ProjectReference Include="..\ConfigLens.SampleData\ConfigLens.SampleData.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Real AKS Deployment Scan: Azure Resource Manager (cluster discovery + credentials) and the
+         Kubernetes API client (live cluster inventory), per CLAUDE.md section 19's "appropriate
+         authentication mechanisms" - DefaultAzureCredential, never a hardcoded secret. -->
+    <PackageReference Include="Azure.Identity" Version="1.21.0" />
+    <PackageReference Include="Azure.ResourceManager" Version="1.14.0" />
+    <PackageReference Include="Azure.ResourceManager.ContainerService" Version="1.7.0" />
+    <PackageReference Include="KubernetesClient" Version="19.0.2" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

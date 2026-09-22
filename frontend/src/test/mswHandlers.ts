@@ -24,6 +24,15 @@ export const handlers = [
 
   http.get('*/api/reference-data', () => HttpResponse.json(referenceDataFixture)),
 
+  http.get('*/api/aks/clusters', ({ request }) => {
+    const subscriptionId = new URL(request.url).searchParams.get('subscriptionId')
+    return HttpResponse.json(subscriptionId === 'sub-assessor-prod-01' ? ['aks-assessor-prod-eastus', 'aks-assessor-prod-westus'] : [])
+  }),
+  http.get('*/api/aks/namespaces', ({ request }) => {
+    const clusterName = new URL(request.url).searchParams.get('clusterName')
+    return HttpResponse.json(clusterName === 'aks-assessor-prod-eastus' ? ['assessor-prod', 'assessor-prod-riverbend'] : [])
+  }),
+
   http.post('*/api/scans/aks-deployment', () => HttpResponse.json(aksScanResponseFixture)),
   http.post('*/api/scans/application-configuration', () => HttpResponse.json(appConfigScanResponseFixture)),
   http.post('*/api/scans/configuration-characteristics', () => HttpResponse.json(characteristicsScanResponseFixture)),

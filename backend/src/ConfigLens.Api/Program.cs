@@ -21,6 +21,9 @@ using ConfigLens.Infrastructure.ApplicationApis;
 using ConfigLens.Infrastructure.Azure;
 using ConfigLens.Infrastructure.Kubernetes;
 using ConfigLens.SampleData;
+using Azure.Core;
+using Azure.Identity;
+using Azure.ResourceManager;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
@@ -54,11 +57,22 @@ if (envOverrides.Count > 0)
 
 // --- Sample data / Infrastructure (Domain ports -> Infrastructure adapters) ---
 builder.Services.AddSingleton<ISampleDataProvider, SampleDataProvider>();
-builder.Services.AddSingleton<IKubernetesInventoryReader, SampleDataKubernetesInventoryReader>();
 builder.Services.AddSingleton<IApplicationConfigurationClient, SampleDataApplicationConfigurationClient>();
 builder.Services.AddSingleton<IRuleSetProvider, SampleDataRuleSetProvider>();
 builder.Services.AddSingleton<IDependencyAccessibilityChecker, SampleDataDependencyAccessibilityChecker>();
 builder.Services.AddSingleton<IReferenceDataProvider, SampleDataReferenceDataProvider>();
+
+// --- AKS Deployment Scan: real Azure Resource Manager / AKS API server integration.
+// DefaultAzureCredential resolves via az-cli login, a managed identity, or the
+// standard AZURE_* environment variables - never a credential baked into source
+// or the Docker image (CLAUDE.md sections 19-20). ConfigLensApiFactory (tests)
+// overrides these two registrations with the sample-data-backed adapters above
+// so tests never need live Azure/AKS access.
+builder.Services.AddSingleton<TokenCredential>(new DefaultAzureCredential());
+builder.Services.AddSingleton(sp => new ArmClient(sp.GetRequiredService<TokenCredential>()));
+builder.Services.AddSingleton<AksClusterConnector>();
+builder.Services.AddSingleton<IAksClusterDirectory, AzureAksClusterDirectory>();
+builder.Services.AddSingleton<IKubernetesInventoryReader, AzureKubernetesInventoryReader>();
 
 // --- Cross-cutting Application services ---
 builder.Services.AddSingleton<IClock, SystemClock>();

@@ -1,6 +1,7 @@
 using ConfigLens.Application.Comparison;
 using ConfigLens.Application.Validation;
 using ConfigLens.Domain.Comparison;
+using ConfigLens.Domain.Scan.Aks;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,9 @@ public sealed class ConfigLensExceptionHandler(ILogger<ConfigLensExceptionHandle
             ScanNotFoundException => (StatusCodes.Status404NotFound, "not-found", "Scan not found."),
             RuleSetNotFoundException => (StatusCodes.Status400BadRequest, "invalid-input", "Rule set not found."),
             CategoryMismatchException => (StatusCodes.Status400BadRequest, "category-mismatch", "The two scans do not belong to the same category."),
+            AksClusterNotFoundException => (StatusCodes.Status404NotFound, "not-found", "AKS subscription or cluster not found."),
+            AksConnectivityException => (StatusCodes.Status502BadGateway, "infrastructure-failure", "Unable to reach Azure or the AKS cluster."),
+            AksTimeoutException => (StatusCodes.Status504GatewayTimeout, "timeout", "The request to Azure or the AKS cluster timed out."),
             FormatException => (StatusCodes.Status400BadRequest, "invalid-input", "The request was not in a valid format."),
             _ => (StatusCodes.Status500InternalServerError, "application-failure", "An unexpected error occurred.")
         };
